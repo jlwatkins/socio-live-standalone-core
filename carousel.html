@@ -38,16 +38,20 @@
     var names = ['awrfawrf', 'sfawefwe', 'awefawef', 'awefawefdsf', 'sdfaregf'];
 
     setInterval(function() {
-        makeDiv(names[Math.floor(Math.random()*names.length)], names[Math.floor(Math.random()*names.length)]);
+        var randomName1 = names[Math.floor(Math.random()*names.length)];
+        var randomName2 = names[Math.floor(Math.random()*names.length)];
+        var randomOcc = names[Math.floor(Math.random()*names.length)];
+        makeDiv(randomName1, randomName2, randomOcc);
     }, 5000);
 
-    function makeDiv(fName, lName){
+    function makeDiv(fName, lName, occ){
 
         var nameTag = `
             <div class="nametag-container">
                 <div class="nametag">
                     <span class="firstName">`+fName+`</span>
                     <span class="lastName">`+lName+`</span>
+                    </br><span class="occupation">`+occ+`</span>
                 </div>
                 <div class="arrow-down"></div>
             </div>
