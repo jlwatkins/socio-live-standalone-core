@@ -35,7 +35,9 @@
 
     var names = ['awrfawrf', 'sfawefwe', 'awefawef', 'awefawefdsf', 'sdfaregf'];
 
-    makeDiv('booty', 'hunter');
+    setInterval(function() {
+        makeDiv(names[Math.floor(Math.random()*names.length)], names[Math.floor(Math.random()*names.length)]);
+    }, 3000);
 
     function makeDiv(fName, lName){
 
@@ -50,15 +52,15 @@
         `;
         $newdiv = $(nameTag);
 
-        var posx = (Math.random() * ($(document).width() - 150 - $newdiv.width())).toFixed();
-        var posy = (Math.random() * ($(document).height() - 100 - $newdiv.height())).toFixed();
+        var posx = (Math.random() * ($(document).width() - 300 - $newdiv.width())).toFixed();
+        var posy = (Math.random() * ($(document).height() - 200 - $newdiv.height())).toFixed();
 
         $newdiv.css({
             'position':'absolute',
             'left':posx+'px',
             'top':posy+'px',
             'display':'none'
-        }).appendTo( 'body' ).fadeIn(800).delay(1200).fadeOut(1200, function(){
+        }).appendTo( 'body' ).fadeIn(800).delay(3000).fadeOut(1200, function(){
            $(this).remove();
         });
     }
