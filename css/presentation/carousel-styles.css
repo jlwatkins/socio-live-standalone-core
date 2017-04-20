@@ -64,11 +64,12 @@ body {
 .arrow-down {
     position: relative;
     width: 0;
-    height: 0;
+    height: 0px;
     left: 45%;
+    top: -4px;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 15px solid red;
+    border-top: 15px solid rgba(0,0,0,0.3);
     -ms-transform: scale(1,0.5); /* IE 9 */
     -webkit-transform: scale(1,0.5); /* Safari */
     transform: scale(1,0.5); /* Standard syntax */

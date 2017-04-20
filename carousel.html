@@ -21,16 +21,47 @@
             <span class="firstName">Benedict</span>
             <span class="lastName">Cumbersnack</span>
         </div>
-        <div class="arrow-down"></div>    
+        <div class="arrow-down"></div>
     </div>
 
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 
     <script>
     particlesJS.load('particles-js', './js/particles.json', function() {
         console.log('callback - particles.js config loaded');
     });
+
+    var names = ['awrfawrf', 'sfawefwe', 'awefawef', 'awefawefdsf', 'sdfaregf'];
+
+    makeDiv('booty', 'hunter');
+
+    function makeDiv(fName, lName){
+
+        var nameTag = `
+            <div class="nametag-container">
+                <div class="nametag">
+                    <span class="firstName">`+fName+`</span>
+                    <span class="lastName">`+lName+`</span>
+                </div>
+                <div class="arrow-down"></div>
+            </div>
+        `;
+        $newdiv = $(nameTag);
+
+        var posx = (Math.random() * ($(document).width() - 150 - $newdiv.width())).toFixed();
+        var posy = (Math.random() * ($(document).height() - 100 - $newdiv.height())).toFixed();
+
+        $newdiv.css({
+            'position':'absolute',
+            'left':posx+'px',
+            'top':posy+'px',
+            'display':'none'
+        }).appendTo( 'body' ).fadeIn(800).delay(1200).fadeOut(1200, function(){
+           $(this).remove();
+        });
+    }
     </script>
 </body>
 </html>
