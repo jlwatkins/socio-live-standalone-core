@@ -19,7 +19,7 @@ body {
 .vignette {
     margin:0;
     padding: 0;
-    position: relative;
+    position: absolute;
     z-index: 0;
     height: 100%;
     width: 100%;
@@ -35,4 +35,41 @@ body {
     z-index: 10;
     height: 99.74%;
     width: auto;
+}
+
+.nametag-container {
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    z-index: 20;
+}
+
+.nametag {
+    position: relative;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 10px;
+}
+
+.nametag span {
+    color: #FAFAFA;
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.firstName {
+    font-weight: 300;
+}
+
+.arrow-down {
+    position: relative;
+    width: 0;
+    height: 0;
+    left: 45%;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 15px solid red;
+    -ms-transform: scale(1,0.5); /* IE 9 */
+    -webkit-transform: scale(1,0.5); /* Safari */
+    transform: scale(1,0.5); /* Standard syntax */
 }
