@@ -59,6 +59,18 @@ body {
 
 .firstName {
     font-weight: 300;
+    opacity: 0.8;
+}
+
+.lastName {
+    opacity: 0.85;
+}
+
+.occupation {
+    font-size: 45px !important;
+    color: white !important;
+    opacity: 0.6;
+    font-family: 'Open Sans', sans-serif !important;
 }
 
 .arrow-down {

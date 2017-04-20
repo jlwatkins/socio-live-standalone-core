@@ -7,6 +7,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="./css/presentation/carousel-styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
 
     <title>Document</title>
 </head>
@@ -20,6 +21,7 @@
         <div class="nametag">
             <span class="firstName">Benedict</span>
             <span class="lastName">Cumbersnack</span>
+            </br><span class="occupation">Baking</span>
         </div>
         <div class="arrow-down"></div>
     </div>
@@ -37,7 +39,7 @@
 
     setInterval(function() {
         makeDiv(names[Math.floor(Math.random()*names.length)], names[Math.floor(Math.random()*names.length)]);
-    }, 3000);
+    }, 5000);
 
     function makeDiv(fName, lName){
 
@@ -52,8 +54,8 @@
         `;
         $newdiv = $(nameTag);
 
-        var posx = (Math.random() * ($(document).width() - 300 - $newdiv.width())).toFixed();
-        var posy = (Math.random() * ($(document).height() - 200 - $newdiv.height())).toFixed();
+        var posx = (0.6*Math.random() * ($(document).width() - $newdiv.width())).toFixed();
+        var posy = (0.8*Math.random() * ($(document).height() - $newdiv.height())).toFixed();
 
         $newdiv.css({
             'position':'absolute',
