@@ -13,19 +13,21 @@
 </head>
 <body>
 
-    <div class="vignette">
-        <div id="particles-js"></div>
-    </div>
-
-    <div class="nametag-container">
-        <div class="nametag">
-            <span class="firstName">Benedict</span>
-            <span class="lastName">Cumbersnack</span>
-            </br><span class="occupation">Baking</span>
+    <div class="background">
+        <div class="vignette">
+            <div id="particles-js"></div>
         </div>
-        <div class="arrow-down"></div>
-    </div>
 
+        <div class="nametag-container">
+            <div class="nametag">
+                <span class="firstName">Benedict</span>
+                <span class="lastName">Cumbersnack</span>
+                </br><span class="occupation">Baking</span>
+            </div>
+            <div class="arrow-down"></div>
+        </div>
+
+    </div>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -45,6 +47,8 @@
     }, 5000);
 
     function makeDiv(fName, lName, occ){
+
+        parentDiv = '.background';
 
         var nameTag = `
             <div class="nametag-container">
@@ -66,7 +70,7 @@
             'left':posx+'px',
             'top':posy+'px',
             'display':'none'
-        }).appendTo( 'body' ).fadeIn(800).delay(3000).fadeOut(1200, function(){
+        }).appendTo( parentDiv ).fadeIn(800).delay(3000).fadeOut(1200, function(){
            $(this).remove();
         });
     }

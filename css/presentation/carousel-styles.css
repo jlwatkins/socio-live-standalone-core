@@ -16,6 +16,18 @@ body {
     width: 100%;
 }
 
+.background {
+    padding: 0px;
+    margin: 0px;
+    background: #031948; /* Old Browsers */
+    background: -webkit-linear-gradient(top right,#a02b51,#392844); /*Safari 5.1-6*/
+    background: -o-linear-gradient(top right,#a02b51,#392844); /*Opera 11.1-12*/
+    background: -moz-linear-gradient(top right,#a02b51,#392844); /*Fx 3.6-15*/
+    background: linear-gradient(top right, #a02b51, #392844); /*Standard*/
+    height: 99.8%;
+    width: 100%;
+}
+
 .vignette {
     margin:0;
     padding: 0;
