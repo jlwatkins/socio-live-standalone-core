@@ -30,6 +30,7 @@ body {
 }
 
 #particles-js {
+    opacity: 0.6;
     position: relative;
     z-index: 10;
     height: 99.74%;
