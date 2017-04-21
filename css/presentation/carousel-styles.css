@@ -41,7 +41,7 @@ body {
     position: absolute;
     z-index: 5;
     height: 99.74%;
-    width: auto;
+    width: 100%;
 }
 
 .nametag-container {

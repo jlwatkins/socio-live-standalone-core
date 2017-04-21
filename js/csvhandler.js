@@ -34,6 +34,24 @@ function processData(csv) {
             lines.push(tarr);
     }
     console.log(lines[0][0]);
+    $('#csv-loader').fadeOut(1500, function() {
+        $('#csv-loader').remove();
+
+        $('.vignette').show();
+
+        setTimeout(function() {
+
+            $('#particles-js').css({
+                'height': '99.74%',
+                'width': '100%'
+            });
+
+            particlesJS.load('particles-js', './js/particles.json', function() {
+                console.log('callback - particles.js config loaded');
+            });
+        }, 1000);
+
+    });
 }
 
 function errorHandler(evt) {
