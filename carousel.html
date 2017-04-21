@@ -17,7 +17,7 @@
     <div class="background">
 
         <div id="csv-loader">
-            <input type="file" name="files" id="files" required="required"/>
+            <input type="file" name="files" id="files" required="required" accept=".csv" onchange="handleFiles(this.files)"/>
             <div class="file-dummy">
                 <span class="success">Great, your file has been uploaded</span>
 
@@ -46,6 +46,7 @@
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
     <script src="./js/gradient.js"></script>
+    <script src="./js/csvhandler.js"></script>
 
     <script>
 
