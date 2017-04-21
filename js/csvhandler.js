@@ -34,24 +34,26 @@ function processData(csv) {
             lines.push(tarr);
     }
     console.log(lines[0][0]);
-    $('#csv-loader').fadeOut(1500, function() {
+
+    $('.vignette').show();
+
+    $('#csv-loader').delay(2000).animate({'opacity': '0'}, 200, 'linear');
+
+    setTimeout(function() {
         $('#csv-loader').remove();
+    }, 2800);
 
-        $('.vignette').show();
+    setTimeout(function() {
 
-        setTimeout(function() {
+        $('#particles-js').css({
+            'height': '99.74%',
+            'width': '100%'
+        });
 
-            $('#particles-js').css({
-                'height': '99.74%',
-                'width': '100%'
-            });
-
-            particlesJS.load('particles-js', './js/particles.json', function() {
-                console.log('callback - particles.js config loaded');
-            });
-        }, 1000);
-
-    });
+        particlesJS.load('particles-js', './js/particles.json', function() {
+            console.log('callback - particles.js config loaded');
+        });
+    }, 10);
 }
 
 function errorHandler(evt) {
