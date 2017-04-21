@@ -18,22 +18,31 @@ function getAsText(fileToRead) {
 }
 
 function loadHandler(event) {
-  var csv = event.target.result;
+  var csv = event.target.result.replace(/\r/g, "\n");
   processData(csv);
 }
 
 function processData(csv) {
-    var allTextLines = csv.split(/\r\n|\n/);
-    var lines = [];
-    for (var i=0; i<allTextLines.length; i++) {
-        var data = allTextLines[i].split(';');
-            var tarr = [];
-            for (var j=0; j<data.length; j++) {
-                tarr.push(data[j]);
-            }
-            lines.push(tarr);
+    console.log(csv);
+    var allTextLines = csv.split(/\n/);
+    console.log(allTextLines);
+    var people = [];
+    for (var i=1; i<allTextLines.length; i++) {
+        var splitItems = allTextLines[i].split(/,/);
+        var data = {
+            first_name: splitItems[0],
+            last_name: splitItems[1],
+            position: splitItems[2]
+        };
+        people.push(data);
     }
-    console.log(lines[0][0]);
+
+    /* Start loop for generating random popups of people */
+
+    setInterval(function() {
+        var randomPerson = people[Math.floor(Math.random()*people.length)];
+        makeDiv(randomPerson.first_name, randomPerson.last_name, randomPerson.position);
+    }, 5000);
 
     $('.vignette').show();
 

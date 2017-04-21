@@ -56,12 +56,7 @@
 
     setInterval(updateGradient,10);
 
-    setInterval(function() {
-        var randomName1 = names[Math.floor(Math.random()*names.length)];
-        var randomName2 = names[Math.floor(Math.random()*names.length)];
-        var randomOcc = names[Math.floor(Math.random()*names.length)];
-        makeDiv(randomName1, randomName2, randomOcc);
-    }, 5000);
+    
 
     $('#csv-loader').on('dragenter', function() {
         $(this).css({'background-color':'#FFC107'});
