@@ -8,17 +8,29 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
     <link rel="stylesheet" href="./css/presentation/carousel-styles.css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <title>Document</title>
 </head>
 <body>
 
     <div class="background">
+
+        <div id="csv-loader">
+            <span>Drop your CSV file here.
+                </br><i class="fa fa-file-o"></i>
+            </span>
+            <div id="clickHere">
+                or click here..
+                <input type="file" name="file" id="file" />
+            </div>
+        </div>
+
         <div class="vignette">
             <div id="particles-js"></div>
         </div>
 
-        <div class="nametag-container">
+        <div class="nametag-container" style="visibility: hidden">
             <div class="nametag">
                 <span class="firstName">Benedict</span>
                 <span class="lastName">Cumbersnack</span>
@@ -31,13 +43,19 @@
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="./js/gradient.js"></script>
 
     <script>
+
+    $('.vignette').hide();
+
     particlesJS.load('particles-js', './js/particles.json', function() {
         console.log('callback - particles.js config loaded');
     });
 
     var names = ['awrfawrf', 'sfawefwe', 'awefawef', 'awefawefdsf', 'sdfaregf'];
+
+    setInterval(updateGradient,10);
 
     setInterval(function() {
         var randomName1 = names[Math.floor(Math.random()*names.length)];
@@ -45,6 +63,14 @@
         var randomOcc = names[Math.floor(Math.random()*names.length)];
         makeDiv(randomName1, randomName2, randomOcc);
     }, 5000);
+
+    $('#csv-loader').on('dragenter', function() {
+        $(this).css({'background-color':'#FFC107'});
+    });
+
+    $('#csv-loader').on('dragleave', function() {
+        $(this).css({'background-color':'black'});
+    });
 
     function makeDiv(fName, lName, occ){
 
