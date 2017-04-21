@@ -46,7 +46,7 @@ function processData(csv) {
         makeDiv(person.first_name, person.last_name, person.position);
     }, 5000);
 
-    $('.vignette').show();
+    $('#nametag-container').show();
 
     $('#csv-loader').delay(2000).animate({'opacity': '0'}, 200, 'linear');
 

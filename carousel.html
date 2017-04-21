@@ -28,8 +28,10 @@
             </div>
         </div>
 
-        <div class="vignette">
+        <div id="nametag-container">
+            <div class="vignette"></div>
             <div id="particles-js"></div>
+            <div id="spinner"></div>
         </div>
 
         <div class="nametag-container" style="visibility: hidden">
@@ -50,13 +52,13 @@
 
     <script>
 
-    $('.vignette').hide();
+    $('#nametag-container').hide();
 
     var names = ['awrfawrf', 'sfawefwe', 'awefawef', 'awefawefdsf', 'sdfaregf'];
 
     setInterval(updateGradient,10);
 
-    
+
 
     $('#csv-loader').on('dragenter', function() {
         $(this).css({'background-color':'#FFC107'});
