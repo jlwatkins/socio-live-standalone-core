@@ -37,11 +37,13 @@ function processData(csv) {
         people.push(data);
     }
 
-    /* Start loop for generating random popups of people */
+    /* Start loop for generating popups of people */
 
+    var personCtr = 0;
     setInterval(function() {
-        var randomPerson = people[Math.floor(Math.random()*people.length)];
-        makeDiv(randomPerson.first_name, randomPerson.last_name, randomPerson.position);
+        if(personCtr == people.length) personCtr = 0;
+        var person = people[personCtr++];
+        makeDiv(person.first_name, person.last_name, person.position);
     }, 5000);
 
     $('.vignette').show();
