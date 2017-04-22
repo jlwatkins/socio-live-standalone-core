@@ -22,11 +22,17 @@ function loadHandler(event) {
   processData(csv);
 }
 
+var people;
+
+function getPeople() {
+    return jQuery.extend(true, {}, people);
+}
+
 function processData(csv) {
     console.log(csv);
     var allTextLines = csv.split(/\n/);
     console.log(allTextLines);
-    var people = [];
+    people = [];
     for (var i=1; i<allTextLines.length; i++) {
         var splitItems = allTextLines[i].split(/,/);
         var data = {
@@ -36,6 +42,30 @@ function processData(csv) {
         };
         people.push(data);
     }
+
+    people.getMaxFirstname = function() {
+        var max = 0;
+        people.forEach(function(person) {
+            if(person.first_name.length > max) max = person.first_name.length;
+        });
+        return max;
+    };
+
+    people.getMaxLastname= function() {
+        var max = 0;
+        people.forEach(function(person) {
+            if(person.last_name.length > max) max = person.last_name.length;
+        });
+        return max;
+    };
+
+    people.getMaxOccupation = function() {
+        var max = 0;
+        people.forEach(function(person) {
+            if(person.position.length > max) max = person.position.length;
+        });
+        return max;
+    };
 
     /* Start loop for generating popups of people */
 

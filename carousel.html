@@ -29,10 +29,6 @@
         </div>
 
         <div id="nametag-container">
-            <div class="vignette"></div>
-            <button id="spinner-toggle">Open Spinner</button>
-            <button id="spin-button">Spin</button>
-            <div id="particles-js"></div>
             <div id="spinner">
                 <div style="position:relative; height: 35%;"></div>
                 <h1 class="name-picker">
@@ -40,8 +36,14 @@
                     <span id="last_name_spinner">Cumbersnack</span>
                 </h1>
                 <h2><span id="occupation_spinner">Baker</span></h2>
-
+                <button id="spin-button">Spin</button>
             </div>
+
+            <div class="vignette"></div>
+
+            <button id="spinner-toggle">Open Spinner</button>
+
+            <div id="particles-js"></div>
         </div>
 
         <div class="nametag-container" style="visibility: hidden">
@@ -66,10 +68,10 @@
 
     setInterval(updateGradient,10);
 
-
+    var attendeeInfo;
 
     $('#csv-loader').on('dragenter', function() {
-        $(this).css({'background-color':'#FFC107'});
+        $(this).css({'background-color':'#ff5252'});
     });
 
     $('#csv-loader').on('dragleave', function() {
@@ -110,21 +112,74 @@
         if(!spinnerOpen) {
             $('#spinner').animate({'opacity': '1'});
             $('#spinner-toggle').text('Close Spinner');
-            $('#spin-button').animate({'opacity': '1'});
+            $('#spin-button').animate({'opacity': '1'}, 300);
             $('#spin-button').prop('disabled', false);
 
             spinnerOpen = true;
         }
         else {
+            $('#spin-button').animate({'opacity': '0'}, 10);
             $('#spinner').animate({'opacity': '0'});
             $('#spinner-toggle').text('Open Spinner');
-            $('#spin-button').animate({'opacity': '0'});
             $('#spin-button').prop('disabled', true);
 
             spinnerOpen = false;
         }
 
     });
+
+    var firstLetters = ['b','o','t','y'];
+    var lastLetters = ['h','u','n','t','e','r'];
+    var occLetters = ['b','a','k','i','n','g'];
+
+    var spinning = false;
+    var intervalID;
+    $('#spin-button').on('click', function() {
+        if(!spinning) {
+            $('#spin-button').text('Stop');
+            spinning = true;
+
+            attendeeInfo = getPeople();
+
+            intervalID = setInterval(function() {
+
+                var fnLength = attendeeInfo.getMaxFirstname();
+                var lnLength = attendeeInfo.getMaxLastname();
+                var occLength = attendeeInfo.getMaxOccupation();
+
+                var randomFirstName = "";
+                for(var i = 0; i<fnLength; i++) {
+                    randomFirstName += firstLetters[getRandomInt(0, firstLetters.length)];
+                }
+
+                var randomLastName = "";
+                for(var i = 0; i<lnLength; i++) {
+                    randomLastName += lastLetters[getRandomInt(0, lastLetters.length)];
+                }
+
+                var randomOccupation = "";
+                for(var i = 0; i<occLength; i++) {
+                    randomOccupation += occLetters[getRandomInt(0, occLetters.length)];
+                }
+
+                $('#first_name_spinner').text(randomFirstName);
+                $('#last_name_spinner').text(randomLastName);
+                $('#occupation_spinner').text(randomOccupation);
+
+            }, 15);
+
+        } else {
+            $('#spin-button').text('Spin');
+            spinning = false;
+
+            clearInterval(intervalID);
+        }
+    });
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
     </script>
 </body>
 </html>
