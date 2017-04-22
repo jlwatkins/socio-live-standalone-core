@@ -11,6 +11,10 @@ body {
     width: 100%;
 }
 
+a, a:active, a:focus{
+   outline: none !important;
+}
+
 .background {
     padding: 0px;
     margin: 0px;
@@ -62,18 +66,21 @@ body {
 }
 
 #spinner-toggle {
+    outline: none;
     position: absolute;
-    width: 140px;
+    display: inline-block;
     height: 45px;
     z-index: 10;
-    left: 91%;
     top: 2%;
+    left: 90%;
+    padding-left: 6px;
+    padding-right: 6px;
     border-radius: 10px;
     border: 2px solid #FAFAFA;
     background-color: rgba(0,0,0,0.0);
     color: #FAFAFA;
     font-family: 'Open Sans', sans-serif;
-    font-size: 25px;
+    font-size: 20px;
     text-transform: uppercase;
     transition: all 500ms ease-in-out;
     -o-transition: all 500ms ease-in-out;
@@ -81,10 +88,14 @@ body {
     -webkit-transition: all 500ms ease-in-out;
 }
 
+#spinner-toggle:focus #spinner-toggle:active{
+    outline: none;
+}
+
 #spinner-toggle:hover {
     cursor: default;
-    background-color: #FAFAFA;
-    color: black;
+    background-color: #FF5722;
+    border: 2px solid #FF5722;
 }
 
 .nametag-container {

@@ -30,10 +30,13 @@
 
         <div id="nametag-container">
             <div class="vignette"></div>
-            <button id="spinner-toggle">Spin</button>
+            <button id="spinner-toggle">Open Spinner</button>
             <div id="particles-js">
             </div>
-            <div id="spinner"></div>
+            <div id="spinner">
+                <h1 class="name-picker">Benedict Cumbersnack</h1>
+                <button id="spin-button">Spin</button>
+            </div>
         </div>
 
         <div class="nametag-container" style="visibility: hidden">
@@ -55,8 +58,6 @@
     <script>
 
     $('#nametag-container').hide();
-
-    var names = ['awrfawrf', 'sfawefwe', 'awefawef', 'awefawefdsf', 'sdfaregf'];
 
     setInterval(updateGradient,10);
 
@@ -97,7 +98,24 @@
         }).appendTo( parentDiv ).fadeIn(800).delay(3000).fadeOut(1200, function(){
            $(this).remove();
         });
-    }
+    };
+
+    var spinnerOpen = false;
+    $('#spinner-toggle').on('click', function() {
+        if(!spinnerOpen) {
+            $('#spinner').animate({'opacity': '1'});
+            $('#spinner-toggle').text('Close Spinner');
+
+            spinnerOpen = true;
+        }
+        else {
+            $('#spinner').animate({'opacity': '0'});
+            $('#spinner-toggle').text('Open Spinner');
+
+            spinnerOpen = false;
+        }
+
+    });
     </script>
 </body>
 </html>
