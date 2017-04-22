@@ -38,7 +38,7 @@ var color1 = "rgba("+r1+","+g1+","+b1+",0.6)";
 var r2 = Math.round(istep * c1_0[0] + step * c1_1[0]);
 var g2 = Math.round(istep * c1_0[1] + step * c1_1[1]);
 var b2 = Math.round(istep * c1_0[2] + step * c1_1[2]);
-var color2 = "rgba("+r2+","+g2+","+b2+"0.6)";
+var color2 = "rgba("+r2+","+g2+","+b2+",0.6)";
 
  $('.background').css({
         background: '-webkit-linear-gradient(top right,'+color1+', '+color2+')'

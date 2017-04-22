@@ -24,10 +24,10 @@ function loadHandler(event) {
 
 var people;
 
-attendees = {};
+_attendees = {};
 
 function getPeople() {
-    return jQuery.extend(true, {}, attendees);
+    return jQuery.extend(true, {}, _attendees);
 }
 
 function processData(csv) {
@@ -45,9 +45,9 @@ function processData(csv) {
         people.push(data);
     }
 
-    attendees.list = people;
+    _attendees.list = people;
 
-    attendees.getMaxFirstname = function() {
+    _attendees.getMaxFirstname = function() {
         var max = 0;
         people.forEach(function(person) {
             if(person.first_name.length > max) max = person.first_name.length;
@@ -55,7 +55,7 @@ function processData(csv) {
         return max;
     };
 
-    attendees.getMaxLastname = function() {
+    _attendees.getMaxLastname = function() {
         var max = 0;
         people.forEach(function(person) {
             if(person.last_name.length > max) max = person.last_name.length;
@@ -63,7 +63,7 @@ function processData(csv) {
         return max;
     };
 
-    attendees.getMaxOccupation = function() {
+    _attendees.getMaxOccupation = function() {
         var max = 0;
         people.forEach(function(person) {
             if(person.position.length > max) max = person.position.length;
@@ -71,7 +71,7 @@ function processData(csv) {
         return max;
     };
 
-    attendees.getFirstLetters = function() {
+    _attendees.getFirstLetters = function() {
         var letters = [];
 
         people.forEach(function(person) {
@@ -87,7 +87,7 @@ function processData(csv) {
         return uniqueLetters;
     };
 
-    attendees.getLastLetters = function() {
+    _attendees.getLastLetters = function() {
         var letters = [];
 
         people.forEach(function(person) {
@@ -103,7 +103,7 @@ function processData(csv) {
         return uniqueLetters;
     };
 
-    attendees.getOccLetters = function() {
+    _attendees.getOccLetters = function() {
         var letters = [];
 
         people.forEach(function(person) {
