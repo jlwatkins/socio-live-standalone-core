@@ -154,7 +154,7 @@ function runControl() {
       }
 
     }
-    
+
     console.log("Stopping: " + control.stopping + " and Winner: " + control.winner);
     carousel.attr('data-state', (increment % minimum) + 1);
     var thisFigure = $($figures[(increment + 3) % minimum]);
@@ -167,33 +167,6 @@ function runControl() {
 function openAttendeeDrawing() {
   document.getElementById('attendee-drawing-overlay').style.width = "100%";
 
-  var $slotMachine = $('#planeMachine');
-  $slotMachine.empty();
-  temporary = true;
-  setupSlotMachine(users);
-
-  $('#start-stop-button').off('click').on('click', function(e) {
-
-    if(orderedUsers.length  < 6) {
-      alert("You must have at least 6 users joined")
-    } else {
-      temporary = false;
-      var $startStopBtn = $('#start-stop-button');
-      if ($startStopBtn.hasClass('running')) {
-        control.stopping = true;
-      } else {
-        control.stopping = false;
-        control.speed = 100;
-
-        var $startStopBtn = $('#start-stop-button');
-        $startStopBtn.addClass('running');
-        $startStopBtn.html("STOP");
-        control.winner = parseInt(Math.random() * orderedUsers.length) + 1;
-        console.log("Expected Winner: " + users[control.winner].getFullName());
-        runControl()
-      }
-    }
-  })
 }
 
 function setupSlotMachine(usersDictionary) {
