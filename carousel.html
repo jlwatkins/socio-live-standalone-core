@@ -32,10 +32,10 @@
             <div id="spinner">
                 <div style="position:relative; height: 35%;"></div>
                 <h1 class="name-picker">
-                    <span id="first_name_spinner">Benedict </span>
-                    <span id="last_name_spinner">Cumbersnack</span>
+                    <span id="first_name_spinner">&nbsp;</span>
+                    <span id="last_name_spinner">&nbsp;</span>
                 </h1>
-                <h2><span id="occupation_spinner">Baker</span></h2>
+                <h2><span id="occupation_spinner">&nbsp;</span></h2>
                 <button id="spin-button">Spin</button>
             </div>
 
@@ -122,6 +122,10 @@
             $('#spinner').animate({'opacity': '0'});
             $('#spinner-toggle').text('Open Spinner');
             $('#spin-button').prop('disabled', true);
+            $('#first_name_spinner').css('opacity', '0');
+            $('#last_name_spinner').css('opacity', '0');
+            $('#occupation_spinner').css('opacity', '0');
+            clearInterval(intervalID);
 
             spinnerOpen = false;
         }
@@ -134,6 +138,10 @@
         if(!spinning) {
             $('#spin-button').text('Stop');
             spinning = true;
+
+            $('#first_name_spinner').css('opacity', '1');
+            $('#last_name_spinner').css('opacity', '1');
+            $('#occupation_spinner').css('opacity', '1');
 
             attendeeInfo = getPeople();
 
