@@ -24,8 +24,10 @@ function loadHandler(event) {
 
 var people;
 
+attendees = {};
+
 function getPeople() {
-    return jQuery.extend(true, {}, people);
+    return jQuery.extend(true, {}, attendees);
 }
 
 function processData(csv) {
@@ -43,7 +45,9 @@ function processData(csv) {
         people.push(data);
     }
 
-    people.getMaxFirstname = function() {
+    attendees.list = people;
+
+    attendees.getMaxFirstname = function() {
         var max = 0;
         people.forEach(function(person) {
             if(person.first_name.length > max) max = person.first_name.length;
@@ -51,7 +55,7 @@ function processData(csv) {
         return max;
     };
 
-    people.getMaxLastname= function() {
+    attendees.getMaxLastname = function() {
         var max = 0;
         people.forEach(function(person) {
             if(person.last_name.length > max) max = person.last_name.length;
@@ -59,12 +63,60 @@ function processData(csv) {
         return max;
     };
 
-    people.getMaxOccupation = function() {
+    attendees.getMaxOccupation = function() {
         var max = 0;
         people.forEach(function(person) {
             if(person.position.length > max) max = person.position.length;
         });
         return max;
+    };
+
+    attendees.getFirstLetters = function() {
+        var letters = [];
+
+        people.forEach(function(person) {
+            letters = letters.concat(person.first_name.split(''));
+        });
+
+        //Remove duplicates
+        var uniqueLetters = [];
+        $.each(letters, function(i, el){
+            if($.inArray(el, uniqueLetters) === -1) uniqueLetters.push(el);
+        });
+
+        return uniqueLetters;
+    };
+
+    attendees.getLastLetters = function() {
+        var letters = [];
+
+        people.forEach(function(person) {
+            letters = letters.concat(person.last_name.split(''));
+        });
+
+        //Remove duplicates
+        var uniqueLetters = [];
+        $.each(letters, function(i, el){
+            if($.inArray(el, uniqueLetters) === -1) uniqueLetters.push(el);
+        });
+
+        return uniqueLetters;
+    };
+
+    attendees.getOccLetters = function() {
+        var letters = [];
+
+        people.forEach(function(person) {
+            letters = letters.concat(person.position.split(''));
+        });
+
+        //Remove duplicates
+        var uniqueLetters = [];
+        $.each(letters, function(i, el){
+            if($.inArray(el, uniqueLetters) === -1) uniqueLetters.push(el);
+        });
+
+        return uniqueLetters;
     };
 
     /* Start loop for generating popups of people */

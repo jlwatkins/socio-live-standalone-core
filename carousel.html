@@ -128,10 +128,6 @@
 
     });
 
-    var firstLetters = ['b','o','t','y'];
-    var lastLetters = ['h','u','n','t','e','r'];
-    var occLetters = ['b','a','k','i','n','g'];
-
     var spinning = false;
     var intervalID;
     $('#spin-button').on('click', function() {
@@ -146,6 +142,10 @@
                 var fnLength = attendeeInfo.getMaxFirstname();
                 var lnLength = attendeeInfo.getMaxLastname();
                 var occLength = attendeeInfo.getMaxOccupation();
+
+                var firstLetters = attendeeInfo.getFirstLetters();
+                var lastLetters = attendeeInfo.getLastLetters();
+                var occLetters = attendeeInfo.getOccLetters();
 
                 var randomFirstName = "";
                 for(var i = 0; i<fnLength; i++) {
@@ -173,6 +173,11 @@
             spinning = false;
 
             clearInterval(intervalID);
+
+            var randomPerson = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)];
+            $('#first_name_spinner').text(randomPerson.first_name);
+            $('#last_name_spinner').text(randomPerson.last_name);
+            $('#occupation_spinner').text(randomPerson.position);
         }
     });
 
