@@ -19,10 +19,10 @@ a, a:active, a:focus{
     padding: 0px;
     margin: 0px;
     background: #031948; /* Old Browsers */
-    background: -webkit-linear-gradient(top right,#a02b51,#392844); /*Safari 5.1-6*/
-    background: -o-linear-gradient(top right,#a02b51,#392844); /*Opera 11.1-12*/
-    background: -moz-linear-gradient(top right,#a02b51,#392844); /*Fx 3.6-15*/
-    background: linear-gradient(top right, #a02b51, #392844); /*Standard*/
+    background: -webkit-linear-gradient(top right,rgba(57,40,68,0.6), rgba(159,43,81,0.6)); /*Safari 5.1-6*/
+    background: -o-linear-gradient(top right,rgba(57,40,68,0.6), rgba(159,43,81,0.6)); /*Opera 11.1-12*/
+    background: -moz-linear-gradient(top right,rgba(57,40,68,0.6), rgba(159,43,81,0.6)); /*Fx 3.6-15*/
+    background: linear-gradient(top right, rgba(57,40,68,0.6), rgba(159,43,81,0.6)); /*Standard*/
     height: 100%;
     width: 100%;
 }
@@ -73,7 +73,7 @@ a, a:active, a:focus{
     display: inline-block;
     height: 45px;
     z-index: 30;
-    top: 2%;
+    top: 91%;
     left: 90%;
     padding-left: 6px;
     padding-right: 6px;
