@@ -147,28 +147,11 @@
 
             intervalID = setInterval(function() {
 
-                var fnLength = attendeeInfo.getMaxFirstname();
-                var lnLength = attendeeInfo.getMaxLastname();
-                var occLength = attendeeInfo.getMaxOccupation();
+                var randomFirstName = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].first_name;
 
-                var firstLetters = attendeeInfo.getFirstLetters();
-                var lastLetters = attendeeInfo.getLastLetters();
-                var occLetters = attendeeInfo.getOccLetters();
+                var randomLastName = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].last_name;
 
-                var randomFirstName = "";
-                for(var i = 0; i<fnLength; i++) {
-                    randomFirstName += firstLetters[getRandomInt(0, firstLetters.length)];
-                }
-
-                var randomLastName = "";
-                for(var i = 0; i<lnLength; i++) {
-                    randomLastName += lastLetters[getRandomInt(0, lastLetters.length)];
-                }
-
-                var randomOccupation = "";
-                for(var i = 0; i<occLength; i++) {
-                    randomOccupation += occLetters[getRandomInt(0, occLetters.length)];
-                }
+                var randomOccupation = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].position;
 
                 $('#first_name_spinner').text(randomFirstName);
                 $('#last_name_spinner').text(randomLastName);
