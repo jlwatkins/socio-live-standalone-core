@@ -37,6 +37,7 @@ a, a:active, a:focus{
 }
 
 .vignette {
+    pointer-events: none;
     z-index: 10;
     width: 100%;
     height: 100%;
@@ -48,6 +49,7 @@ a, a:active, a:focus{
 }
 
 #particles-js {
+    pointer-events: none;
     opacity: 0.6;
     position: absolute;
     z-index: 5;
@@ -63,6 +65,7 @@ a, a:active, a:focus{
     z-index: 9;
     width: 100%;
     height: 100%;
+    text-align: center;
 }
 
 #spinner-toggle {
@@ -202,4 +205,57 @@ a, a:active, a:focus{
 
 #csv-loader input[type=file]:valid + .file-dummy .default {
   display: none;
+}
+
+#spin-button {
+    opacity: 0;
+    letter-spacing: 4px;
+    position: absolute;
+    z-index: 40;
+    left: 46.5%;
+    top: 55%;
+    outline: none;
+    width: 120px;
+    height: 65px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: rgba(0,0,0,0.0);
+    color: black;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 30px;
+    text-transform: uppercase;
+    transition: all 500ms ease-in-out;
+    -o-transition: all 500ms ease-in-out;
+    -moz-transition: all 500ms ease-in-out;
+    -webkit-transition: all 500ms ease-in-out;
+}
+
+#spin-button:focus #spin-button:active{
+    outline: none;
+}
+
+#spin-button:hover {
+    cursor: default;
+    background-color: black;
+    color: #FAFAFA;
+}
+
+.name-picker {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 80px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+#occupation_spinner {
+    position: relative;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 50px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
 }

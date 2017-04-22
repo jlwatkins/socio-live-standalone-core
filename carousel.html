@@ -31,11 +31,16 @@
         <div id="nametag-container">
             <div class="vignette"></div>
             <button id="spinner-toggle">Open Spinner</button>
-            <div id="particles-js">
-            </div>
+            <button id="spin-button">Spin</button>
+            <div id="particles-js"></div>
             <div id="spinner">
-                <h1 class="name-picker">Benedict Cumbersnack</h1>
-                <button id="spin-button">Spin</button>
+                <div style="position:relative; height: 35%;"></div>
+                <h1 class="name-picker">
+                    <span id="first_name_spinner">Benedict </span>
+                    <span id="last_name_spinner">Cumbersnack</span>
+                </h1>
+                <h2><span id="occupation_spinner">Baker</span></h2>
+
             </div>
         </div>
 
@@ -105,12 +110,16 @@
         if(!spinnerOpen) {
             $('#spinner').animate({'opacity': '1'});
             $('#spinner-toggle').text('Close Spinner');
+            $('#spin-button').animate({'opacity': '1'});
+            $('#spin-button').prop('disabled', false);
 
             spinnerOpen = true;
         }
         else {
             $('#spinner').animate({'opacity': '0'});
             $('#spinner-toggle').text('Open Spinner');
+            $('#spin-button').animate({'opacity': '0'});
+            $('#spin-button').prop('disabled', true);
 
             spinnerOpen = false;
         }
