@@ -185,10 +185,11 @@ function setupSlotMachine(usersDictionary) {
   nextUser = i + 1;
 
   control.speed = 2000;
-  runControl()
+  runControl();
 }
 
 function closeAttendeeDrawing() {
+  $('.loader_fadeIn').animate({'opacity':'1.0'}, 100);
   document.getElementById('attendee-drawing-overlay').style.width = "0%";
 
   $('#carousel').find('figure').empty();
@@ -382,6 +383,8 @@ function runControl() {
 
 function openAttendeeDrawing() {
   document.getElementById('attendee-drawing-overlay').style.width = "100%";
+
+  $('.loader_fadeIn').delay(500).animate({'opacity':'0.0'});
 
   setTimeout(function() {
       pJSDom[0].pJS.fn.particlesRefresh();
