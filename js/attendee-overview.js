@@ -12,6 +12,7 @@ $('#csv-loader').on('dragleave', function() {
     $(this).css({'background-color':'black'});
 });
 
+/* function to generate a popup of attendee's name and occupation */
 function makeDiv(fName, lName, occ){
 
     parentDiv = '.background';
@@ -39,8 +40,9 @@ function makeDiv(fName, lName, occ){
     }).appendTo( parentDiv ).fadeIn(800).delay(3000).fadeOut(1200, function(){
        $(this).remove();
     });
-};
+}
 
+/* Button to open the spinner page */
 var spinnerOpen = false;
 $('#spinner-toggle').on('click', function() {
     if(!spinnerOpen) {
@@ -52,6 +54,7 @@ $('#spinner-toggle').on('click', function() {
 
 });
 
+/* Button to start and stop spinning */
 var spinning = false;
 var intervalID;
 $('#spin-button').on('click', function() {
@@ -113,6 +116,7 @@ function startSpinner() {
 
     attendeeInfo = getPeople();
 
+    /* Display a random first name, last name and occupation from the data from the CSV */
     intervalID = setInterval(function() {
 
         var randomFirstName = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].first_name;

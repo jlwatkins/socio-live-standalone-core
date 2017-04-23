@@ -6,8 +6,6 @@ var colors = new Array(
   [160,43,81],
   [57,40,68]);
 
-console.log('booty snack hunter');
-
 var step = 0;
 //color table indices for:
 // current color left

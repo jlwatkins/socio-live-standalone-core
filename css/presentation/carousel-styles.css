@@ -236,7 +236,7 @@ a, a:active, a:focus{
 #spin-button:hover {
     cursor: default;
     background-color: black;
-    color: #FAFAFA;
+    color: #FFFDE7;
 }
 
 .name-picker {

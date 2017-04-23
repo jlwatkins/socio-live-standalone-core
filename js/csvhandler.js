@@ -32,11 +32,11 @@ function getPeople() {
 
 function processData(csv) {
     console.log(csv);
-    var allTextLines = csv.split(/\n/);
+    var allTextLines = csv.split(/\n/); // First split by line
     console.log(allTextLines);
     people = [];
-    for (var i=1; i<allTextLines.length; i++) {
-        var splitItems = allTextLines[i].split(/,/);
+    for (var i=1; i<allTextLines.length; i++) { // Skip the column titles
+        var splitItems = allTextLines[i].split(/,/); // Then split by comma
         var data = {
             first_name: splitItems[0],
             last_name: splitItems[1],
@@ -47,6 +47,7 @@ function processData(csv) {
 
     _attendees.list = people;
 
+    /* Gets length of largest first name */
     _attendees.getMaxFirstname = function() {
         var max = 0;
         people.forEach(function(person) {
@@ -55,6 +56,7 @@ function processData(csv) {
         return max;
     };
 
+    /* Gets length of largest last name */
     _attendees.getMaxLastname = function() {
         var max = 0;
         people.forEach(function(person) {
@@ -63,6 +65,7 @@ function processData(csv) {
         return max;
     };
 
+    /* Gets length of largest occupation name*/
     _attendees.getMaxOccupation = function() {
         var max = 0;
         people.forEach(function(person) {
@@ -71,56 +74,7 @@ function processData(csv) {
         return max;
     };
 
-    _attendees.getFirstLetters = function() {
-        var letters = [];
-
-        people.forEach(function(person) {
-            letters = letters.concat(person.first_name.split(''));
-        });
-
-        //Remove duplicates
-        var uniqueLetters = [];
-        $.each(letters, function(i, el){
-            if($.inArray(el, uniqueLetters) === -1) uniqueLetters.push(el);
-        });
-
-        return uniqueLetters;
-    };
-
-    _attendees.getLastLetters = function() {
-        var letters = [];
-
-        people.forEach(function(person) {
-            letters = letters.concat(person.last_name.split(''));
-        });
-
-        //Remove duplicates
-        var uniqueLetters = [];
-        $.each(letters, function(i, el){
-            if($.inArray(el, uniqueLetters) === -1) uniqueLetters.push(el);
-        });
-
-        return uniqueLetters;
-    };
-
-    _attendees.getOccLetters = function() {
-        var letters = [];
-
-        people.forEach(function(person) {
-            letters = letters.concat(person.position.split(''));
-        });
-
-        //Remove duplicates
-        var uniqueLetters = [];
-        $.each(letters, function(i, el){
-            if($.inArray(el, uniqueLetters) === -1) uniqueLetters.push(el);
-        });
-
-        return uniqueLetters;
-    };
-
     /* Start loop for generating popups of people */
-
     var personCtr = 0;
     setInterval(function() {
         if(personCtr == people.length) personCtr = 0;
@@ -132,11 +86,15 @@ function processData(csv) {
 
     $('#csv-loader').delay(2000).animate({'opacity': '0'}, 200, 'linear');
 
+    /* Delete the CSV loader after it fades out */
     setTimeout(function() {
         $('#csv-loader').remove();
     }, 2800);
 
     setTimeout(function() {
+
+        /* This is a hack to fix a problem where ParticlesJS does not render
+         * until the page is resized */
 
         $('#particles-js').css({
             'height': '99.74%',
@@ -151,6 +109,6 @@ function processData(csv) {
 
 function errorHandler(evt) {
   if(evt.target.error.name == "NotReadableError") {
-      alert("Canno't read file !");
+      alert("Cannot read file !");
   }
 }
