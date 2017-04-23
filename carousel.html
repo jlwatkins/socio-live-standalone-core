@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="./css/presentation/carousel-styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="background">
+
+        <div id="csv-loader">
+            <input type="file" name="files" id="files" required="required" accept=".csv" onchange="handleFiles(this.files)"/>
+            <div class="file-dummy">
+                <span class="success">Great, your file has been uploaded</span>
+
+                <span class="default">
+                    Drop your CSV file here.
+                    </br><i class="fa fa-file-o"></i>
+                </span>
+            </div>
+        </div>
+
+        <div id="nametag-container">
+            <div id="spinner">
+                <div style="position:relative; height: 35%;"></div>
+                <h1 class="name-picker">
+                    <span id="first_name_spinner">&nbsp;</span>
+                    <span id="last_name_spinner">&nbsp;</span>
+                </h1>
+                <h2><span id="occupation_spinner">&nbsp;</span></h2>
+                <button id="spin-button">Spin</button>
+            </div>
+
+            <div class="vignette"></div>
+
+            <button id="spinner-toggle">Open Spinner</button>
+
+            <div id="particles-js"></div>
+        </div>
+
+        <div class="nametag-container" style="visibility: hidden">
+            <div class="nametag">
+                <span class="firstName">Benedict</span>
+                <span class="lastName">Cumbersnack</span>
+                </br><span class="occupation">Baking</span>
+            </div>
+            <div class="arrow-down"></div>
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="./js/gradient.js"></script>
+    <script src="./js/csvhandler.js"></script>
+
+    <script>
+
+    $('#nametag-container').hide();
+
+    setInterval(updateGradient,10);
+
+    var attendeeInfo;
+
+    $('#csv-loader').on('dragenter', function() {
+        $(this).css({'background-color':'#ff5252'});
+    });
+
+    $('#csv-loader').on('dragleave', function() {
+        $(this).css({'background-color':'black'});
+    });
+
+    function makeDiv(fName, lName, occ){
+
+        parentDiv = '.background';
+
+        var nameTag = `
+            <div class="nametag-container">
+                <div class="nametag">
+                    <span class="firstName">`+fName+`</span>
+                    <span class="lastName">`+lName+`</span>
+                    </br><span class="occupation">`+occ+`</span>
+                </div>
+                <div class="arrow-down"></div>
+            </div>
+        `;
+        $newdiv = $(nameTag);
+
+        var posx = (0.6*Math.random() * ($(document).width() - $newdiv.width())).toFixed();
+        var posy = (0.8*Math.random() * ($(document).height() - $newdiv.height())).toFixed();
+
+        $newdiv.css({
+            'position':'absolute',
+            'left':posx+'px',
+            'top':posy+'px',
+            'display':'none'
+        }).appendTo( parentDiv ).fadeIn(800).delay(3000).fadeOut(1200, function(){
+           $(this).remove();
+        });
+    };
+
+    var spinnerOpen = false;
+    $('#spinner-toggle').on('click', function() {
+        if(!spinnerOpen) {
+            $('#spinner').animate({'opacity': '1'});
+            $('#spinner-toggle').text('Close Spinner');
+            $('#spin-button').animate({'opacity': '1'}, 300);
+            $('#spin-button').prop('disabled', false);
+
+            spinnerOpen = true;
+        }
+        else {
+            $('#spin-button').animate({'opacity': '0'}, 10);
+            $('#spinner').animate({'opacity': '0'});
+            $('#spinner-toggle').text('Open Spinner');
+            $('#spin-button').prop('disabled', true);
+            $('#first_name_spinner').css('opacity', '0');
+            $('#last_name_spinner').css('opacity', '0');
+            $('#occupation_spinner').css('opacity', '0');
+            clearInterval(intervalID);
+
+            spinnerOpen = false;
+        }
+
+    });
+
+    var spinning = false;
+    var intervalID;
+    $('#spin-button').on('click', function() {
+        if(!spinning) {
+            $('#spin-button').text('Stop');
+            spinning = true;
+
+            $('#first_name_spinner').css('opacity', '1');
+            $('#last_name_spinner').css('opacity', '1');
+            $('#occupation_spinner').css('opacity', '1');
+
+            attendeeInfo = getPeople();
+
+            intervalID = setInterval(function() {
+
+                var randomFirstName = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].first_name;
+
+                var randomLastName = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].last_name;
+
+                var randomOccupation = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].position;
+
+                $('#first_name_spinner').text(randomFirstName);
+                $('#last_name_spinner').text(randomLastName);
+                $('#occupation_spinner').text(randomOccupation);
+
+            }, 15);
+
+        } else {
+            $('#spin-button').text('Spin');
+            spinning = false;
+
+            clearInterval(intervalID);
+
+            var randomPerson = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)];
+            $('#first_name_spinner').text(randomPerson.first_name);
+            $('#last_name_spinner').text(randomPerson.last_name);
+            $('#occupation_spinner').text(randomPerson.position);
+        }
+    });
+
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
+    </script>
+</body>
+</html>

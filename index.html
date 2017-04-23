@@ -18,6 +18,7 @@
           type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Iceberg' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 
     <!-- CSS -->
     <!-- Animate css -->
@@ -28,10 +29,12 @@
     <link rel="stylesheet" type="text/css" href="css/presentation/style.css">
     <link rel="stylesheet" type="text/css" href="css/presentation/rotator.css">
     <link rel="stylesheet" type="text/css" href="css/presentation/jquery.slotmachine.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/presentation/carousel-styles.css">
     <!-- Bootstrap v3.3.1 -->
     <link rel="stylesheet" type="text/css" href="css/presentation/bootstrap.min.css">
     <!-- Favicons -->
     <link rel="shortcut icon" href="images/presentation/favicon.ico">
+
 </head>
 
 <body>
@@ -140,24 +143,51 @@
 <div id="attendee-drawing-overlay" class="overlay">
     <a href="javascript:void(0)" class="closebtn" style="z-index: 1000" onclick="closeAttendeeDrawing()">&times;</a>
 
-    <div class="overlay-content container" style="margin-top: 15%;">
-        <div class="col-md-12 col-lg-8 col-lg-offset-2" id="carousel-wrapper">
-            <div id="carousel">
-                <figure></figure>
-                <figure></figure>
-                <figure></figure>
-                <figure></figure>
-                <figure></figure>
-                <figure></figure>
+    <div class="background">
+
+        <div class="loader_fadeIn"></div>
+
+        <div id="csv-loader">
+            <input type="file" name="files" id="files" required="required" accept=".csv" onchange="handleFiles(this.files)"/>
+            <div class="file-dummy">
+                <span class="success">Great, your file has been uploaded</span>
+
+                <span class="default">
+                    Drop your CSV file here.
+                    </br><i class="fa fa-file-o"></i>
+                </span>
             </div>
         </div>
 
-        <div class="col-md-12 col-lg-8 col-lg-offset-2" style="text-align: center; margin-top: 22%; margin-bottom: 5%;">
-            <button id="start-stop-button" class="start-stop-button">
-                SPIN
-            </button>
+        <div id="nametag-container">
+            <div id="spinner">
+                <div style="position:relative; height: 35%;"></div>
+                <h1 class="name-picker">
+                    <span id="first_name_spinner">&nbsp;</span>
+                    <span id="last_name_spinner">&nbsp;</span>
+                </h1>
+                <h2><span id="occupation_spinner">&nbsp;</span></h2>
+                <button id="spin-button">Spin</button>
+            </div>
+
+            <div class="vignette"></div>
+
+            <button id="spinner-toggle">Open Spinner</button>
+
+            <div id="particles-js"></div>
         </div>
+
+        <div class="nametag-container" style="visibility: hidden">
+            <div class="nametag">
+                <span class="firstName">Benedict</span>
+                <span class="lastName">Cumbersnack</span>
+                </br><span class="occupation">Baking</span>
+            </div>
+            <div class="arrow-down"></div>
+        </div>
+
     </div>
+
 </div>
 
 
@@ -191,6 +221,14 @@
 <script src="vendor/countUp.js"></script>
 <!-- Slot Machine for Attendee Drawing -->
 <script src="vendor/presentation/jquery.slotmachine.min.js"></script>
+<!-- Particles JS -->
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<!-- Backround gradient animation -->
+<script src="./js/gradient.js"></script>
+<!-- CSV upload and processing -->
+<script src="./js/csvhandler.js"></script>
+<!-- Attendee overview core script -->
+<script src="./js/attendee-overview.js"></script>
 <!-- Presentation Custom -->
 <script src="js/live-demo.js"></script>
 </body>

@@ -154,7 +154,7 @@ function runControl() {
       }
 
     }
-    
+
     console.log("Stopping: " + control.stopping + " and Winner: " + control.winner);
     carousel.attr('data-state', (increment % minimum) + 1);
     var thisFigure = $($figures[(increment + 3) % minimum]);
@@ -167,33 +167,12 @@ function runControl() {
 function openAttendeeDrawing() {
   document.getElementById('attendee-drawing-overlay').style.width = "100%";
 
-  var $slotMachine = $('#planeMachine');
-  $slotMachine.empty();
-  temporary = true;
-  setupSlotMachine(users);
+  $('.loader_fadeIn').delay(500).animate({'opacity':'0.0'});
 
-  $('#start-stop-button').off('click').on('click', function(e) {
+  setTimeout(function() {
+      if(pJSDom[0] !== undefined) pJSDom[0].pJS.fn.particlesRefresh();
+  }, 500);
 
-    if(orderedUsers.length  < 6) {
-      alert("You must have at least 6 users joined")
-    } else {
-      temporary = false;
-      var $startStopBtn = $('#start-stop-button');
-      if ($startStopBtn.hasClass('running')) {
-        control.stopping = true;
-      } else {
-        control.stopping = false;
-        control.speed = 100;
-
-        var $startStopBtn = $('#start-stop-button');
-        $startStopBtn.addClass('running');
-        $startStopBtn.html("STOP");
-        control.winner = parseInt(Math.random() * orderedUsers.length) + 1;
-        console.log("Expected Winner: " + users[control.winner].getFullName());
-        runControl()
-      }
-    }
-  })
 }
 
 function setupSlotMachine(usersDictionary) {
@@ -216,14 +195,14 @@ function setupSlotMachine(usersDictionary) {
 }
 
 function closeAttendeeDrawing() {
-  document.getElementById('attendee-drawing-overlay').style.width = "0%";
+    $('.loader_fadeIn').animate({'opacity':'1.0'}, 100);
+    document.getElementById('attendee-drawing-overlay').style.width = "0%";
 
-  $('#carousel').find('figure').empty();
-  clearInterval(control.interval);
-  var $startStopBtn = $('#start-stop-button');
-  $startStopBtn.removeClass('running');
-  $startStopBtn.html('SPIN');
+    stopSpinner();
+    closeSpinner();
 }
+
+console.log('new file');
 
 var attendees = new CountUp("attendeesCount", 0, 0, 0, 2.5, options);
 attendees.start();
