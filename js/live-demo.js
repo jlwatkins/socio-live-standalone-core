@@ -170,7 +170,7 @@ function openAttendeeDrawing() {
   $('.loader_fadeIn').delay(500).animate({'opacity':'0.0'});
 
   setTimeout(function() {
-      pJSDom[0].pJS.fn.particlesRefresh();
+      if(pJSDom[0] !== undefined) pJSDom[0].pJS.fn.particlesRefresh();
   }, 500);
 
 }

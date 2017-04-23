@@ -91,10 +91,13 @@ function stopSpinner() {
 
     clearInterval(intervalID);
 
-    var randomPerson = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)];
-    $('#first_name_spinner').text(randomPerson.first_name);
-    $('#last_name_spinner').text(randomPerson.last_name);
-    $('#occupation_spinner').text(randomPerson.position);
+    if(attendeeInfo !== undefined) {
+        var randomPerson = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)];
+        $('#first_name_spinner').text(randomPerson.first_name);
+        $('#last_name_spinner').text(randomPerson.last_name);
+        $('#occupation_spinner').text(randomPerson.position);
+    }
+
 }
 
 function startSpinner() {
