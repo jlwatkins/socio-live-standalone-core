@@ -65,9 +65,12 @@ $('#spin-button').on('click', function() {
 function openSpinner() {
     $('#spinner').animate({'opacity': '1'});
     $('#spinner-toggle').text('Close Spinner');
-    $('#spin-button').animate({'opacity': '1'}, 300);
+    $('#spin-button').animate({'opacity': '1'}, 500);
     $('#spin-button').prop('disabled', false);
-
+    startSpinner();
+    $('#first_name_spinner').delay(500).animate({'opacity': '1'});
+    $('#last_name_spinner').delay(500).animate({'opacity': '1'});
+    $('#occupation_spinner').delay(500).animate({'opacity': '1'});
     spinnerOpen = true;
 }
 

@@ -59,7 +59,7 @@ a, a:active, a:focus{
 
 #spinner {
     opacity: 0;
-    background-color: #FAFAFA;
+    background-color: #FFFDE7;
     position: absolute;
     z-index: 20;
     width: 100%;
