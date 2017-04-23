@@ -189,14 +189,11 @@ function setupSlotMachine(usersDictionary) {
 }
 
 function closeAttendeeDrawing() {
-  $('.loader_fadeIn').animate({'opacity':'1.0'}, 100);
-  document.getElementById('attendee-drawing-overlay').style.width = "0%";
+    $('.loader_fadeIn').animate({'opacity':'1.0'}, 100);
+    document.getElementById('attendee-drawing-overlay').style.width = "0%";
 
-  $('#carousel').find('figure').empty();
-  clearInterval(control.interval);
-  var $startStopBtn = $('#start-stop-button');
-  $startStopBtn.removeClass('running');
-  $startStopBtn.html('SPIN');
+    stopSpinner();
+    closeSpinner();
 }
 
 var attendees = new CountUp("attendeesCount", 0, 0, 0, 2.5, options);

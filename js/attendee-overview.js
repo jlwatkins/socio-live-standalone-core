@@ -44,24 +44,10 @@ function makeDiv(fName, lName, occ){
 var spinnerOpen = false;
 $('#spinner-toggle').on('click', function() {
     if(!spinnerOpen) {
-        $('#spinner').animate({'opacity': '1'});
-        $('#spinner-toggle').text('Close Spinner');
-        $('#spin-button').animate({'opacity': '1'}, 300);
-        $('#spin-button').prop('disabled', false);
-
-        spinnerOpen = true;
+        openSpinner();
     }
     else {
-        $('#spin-button').animate({'opacity': '0'}, 10);
-        $('#spinner').animate({'opacity': '0'});
-        $('#spinner-toggle').text('Open Spinner');
-        $('#spin-button').prop('disabled', true);
-        $('#first_name_spinner').css('opacity', '0');
-        $('#last_name_spinner').css('opacity', '0');
-        $('#occupation_spinner').css('opacity', '0');
-        clearInterval(intervalID);
-
-        spinnerOpen = false;
+        closeSpinner();
     }
 
 });
@@ -70,41 +56,71 @@ var spinning = false;
 var intervalID;
 $('#spin-button').on('click', function() {
     if(!spinning) {
-        $('#spin-button').text('Stop');
-        spinning = true;
-
-        $('#first_name_spinner').css('opacity', '1');
-        $('#last_name_spinner').css('opacity', '1');
-        $('#occupation_spinner').css('opacity', '1');
-
-        attendeeInfo = getPeople();
-
-        intervalID = setInterval(function() {
-
-            var randomFirstName = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].first_name;
-
-            var randomLastName = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].last_name;
-
-            var randomOccupation = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].position;
-
-            $('#first_name_spinner').text(randomFirstName);
-            $('#last_name_spinner').text(randomLastName);
-            $('#occupation_spinner').text(randomOccupation);
-
-        }, 15);
-
+        startSpinner();
     } else {
-        $('#spin-button').text('Spin');
-        spinning = false;
-
-        clearInterval(intervalID);
-
-        var randomPerson = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)];
-        $('#first_name_spinner').text(randomPerson.first_name);
-        $('#last_name_spinner').text(randomPerson.last_name);
-        $('#occupation_spinner').text(randomPerson.position);
+        stopSpinner();
     }
 });
+
+function openSpinner() {
+    $('#spinner').animate({'opacity': '1'});
+    $('#spinner-toggle').text('Close Spinner');
+    $('#spin-button').animate({'opacity': '1'}, 300);
+    $('#spin-button').prop('disabled', false);
+
+    spinnerOpen = true;
+}
+
+function closeSpinner() {
+    $('#spin-button').animate({'opacity': '0'}, 10);
+    $('#spinner').animate({'opacity': '0'});
+    $('#spinner-toggle').text('Open Spinner');
+    $('#spin-button').prop('disabled', true);
+    $('#first_name_spinner').css('opacity', '0');
+    $('#last_name_spinner').css('opacity', '0');
+    $('#occupation_spinner').css('opacity', '0');
+
+    stopSpinner();
+
+    spinnerOpen = false;
+}
+
+function stopSpinner() {
+    $('#spin-button').text('Spin');
+    spinning = false;
+
+    clearInterval(intervalID);
+
+    var randomPerson = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)];
+    $('#first_name_spinner').text(randomPerson.first_name);
+    $('#last_name_spinner').text(randomPerson.last_name);
+    $('#occupation_spinner').text(randomPerson.position);
+}
+
+function startSpinner() {
+    $('#spin-button').text('Stop');
+    spinning = true;
+
+    $('#first_name_spinner').css('opacity', '1');
+    $('#last_name_spinner').css('opacity', '1');
+    $('#occupation_spinner').css('opacity', '1');
+
+    attendeeInfo = getPeople();
+
+    intervalID = setInterval(function() {
+
+        var randomFirstName = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].first_name;
+
+        var randomLastName = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].last_name;
+
+        var randomOccupation = attendeeInfo.list[getRandomInt(0, attendeeInfo.list.length)].position;
+
+        $('#first_name_spinner').text(randomFirstName);
+        $('#last_name_spinner').text(randomLastName);
+        $('#occupation_spinner').text(randomOccupation);
+
+    }, 15);
+}
 
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
