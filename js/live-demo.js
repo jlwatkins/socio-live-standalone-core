@@ -268,6 +268,8 @@ function toggleFullScreen() {
       document.webkitCancelFullScreen();
     }
   }
+
+
 }
 
 var $defaultTheme = $('[name="theme-1"]');
@@ -381,6 +383,10 @@ function runControl() {
 function openAttendeeDrawing() {
   document.getElementById('attendee-drawing-overlay').style.width = "100%";
 
+  setTimeout(function() {
+      pJSDom[0].pJS.fn.particlesRefresh();
+  }, 500);
+
 }
 
 function setupSlotMachine(usersDictionary) {
@@ -404,6 +410,11 @@ function setupSlotMachine(usersDictionary) {
 
 function closeAttendeeDrawing() {
   document.getElementById('attendee-drawing-overlay').style.width = "0%";
+
+  $('#particles-js').css({
+      'height': '99.74%',
+      'width': '100%'
+  });
 }
 
 var attendees = new CountUp("attendeesCount", 0, 0, 0, 2.5, options);

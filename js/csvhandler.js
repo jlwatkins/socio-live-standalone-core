@@ -126,7 +126,7 @@ function processData(csv) {
         if(personCtr == people.length) personCtr = 0;
         var person = people[personCtr++];
         makeDiv(person.first_name, person.last_name, person.position);
-    }, 5000);
+    }, 3500);
 
     $('#nametag-container').show();
 
