@@ -196,46 +196,63 @@ function openAttendeeDrawing() {
   })
 }
 
-function uploadAttendees(file_input) {
-	if(file_input.files.length > 0) {
-		var reader = new FileReader();
-		reader.onload = function(){
+function uploadAttendees(file_obj) {
 
-			// Parse the CSV file (assuming it's actually a CSV)
-			var csvdata = Papa.parse(reader.result, { header: true });
-			if(csvdata.errors.length > 0) {
-				alert("Unable to process CSV file: " + file_input.files[0].name + "\nThe file format is not valid.");
+	var reader = new FileReader();
+	reader.onload = function(){
+
+		var file_name = file_obj.name;
+
+		// Parse the CSV file (assuming it's actually a CSV)
+		var csvdata = Papa.parse(reader.result, { header: true });
+		if(csvdata.errors.length > 0) {
+			alert("Unable to process CSV file: " + file_name + "\n\nThe file format is not valid.");
+			return;
+		}
+
+		// File data is a valid CSV, verify that it contains the correct fields
+		for(var i = 0; i < csvdata.data.length; i++) {
+			
+			// Validate the CSV file header
+			if(typeof csvdata.data[i].first_name != "string" ||
+			   typeof csvdata.data[i].last_name != "string" ||
+			   typeof csvdata.data[i].info != "string") {
+				alert("Unable to process CSV file: " + file_name + "\n\nEnsure that the header row is properly formatted and try uploading again");
 				return;
 			}
-
-			// File data is a valid CSV, verify that it contains the correct fields
-			for(var i = 0; i < csvdata.data.length; i++) {
-				
-				// Validate the CSV file header
-				if(typeof csvdata.data[i].first_name != "string" ||
-				   typeof csvdata.data[i].last_name != "string" ||
-				   typeof csvdata.data[i].info != "string") {
-					alert("Unable to process CSV file: " + file_input.files[0].name + "\nEnsure that the header row is properly formatted and try uploading again");
-					return;
-				}
-			
-				// Make sure that at least the first and last name are set
-				if(csvdata.data[i].first_name == "" ||
-				   csvdata.data[i].last_name == "") {
-					alert("Unable to process CSV file: " + file_input.files[0].name + "\nEnsure that the first and last names of all attendees are set and try uploading again");
-					return;
-				}
+		
+			// Make sure that at least the first and last name are set
+			if(csvdata.data[i].first_name == "" ||
+			   csvdata.data[i].last_name == "") {
+				alert("Unable to process CSV file: " + file_name + "\n\nEnsure that the first and last names of all attendees are set and try uploading again");
+				return;
 			}
-
-			// CSV contents are valid, set the users array to the new data
-			users = {};
-			for(var i = 0; i < csvdata.data.length; i++) {
-				users[i+1] = new BasicUser(i+1, csvdata.data[i].first_name, csvdata.data[i].last_name, csvdata.data[i].info);
-			}
-			orderedUsers = [];
 		}
-		reader.readAsText(file_input.files[0]);
+
+		// Check for duplicates
+		for(var i = 0; i < csvdata.data.length; i++) {
+			var srch_entry = csvdata.data[i];
+			for(var j = 0; j < csvdata.data.length; j++) {
+				if(i == j) {
+					continue;
+				}
+				if(csvdata.data[j].first_name == srch_entry.first_name &&
+				   csvdata.data[j].last_name == srch_entry.last_name &&
+				   csvdata.data[j].info == srch_entry.info) {
+					alert("Unable to process CSV file: " + file_name + "\n\nDuplicate entry for: " + csvdata.data[j].first_name + " " + csvdata.data[j].last_name + " " + csvdata.data[j].info);
+					return;
+				}
+			}
+		}
+
+		// CSV contents are valid, set the users array to the new data
+		users = {};
+		for(var i = 0; i < csvdata.data.length; i++) {
+			users[i+1] = new BasicUser(i+1, csvdata.data[i].first_name, csvdata.data[i].last_name, csvdata.data[i].info);
+		}
+		orderedUsers = [];
 	}
+	reader.readAsText(file_obj);
 }
 
 function setupSlotMachine(usersDictionary) {
@@ -291,7 +308,19 @@ function setupActions() {
 		$('#upload_csv').trigger('click'); 
 	});
 	$('#upload_csv').change(function(ev) {
-		uploadAttendees(this);
+
+		// Only continue of the user selected a file
+		if(this.files.length > 0) {
+
+			// Save the file object 
+			var file_obj = this.files[0];
+
+			// Clear the input value so that the upload dialog event is triggered again
+			$(this).val("");
+
+			// Upload the file contents
+			uploadAttendees(file_obj);
+		}
 	});
   } else {
 
