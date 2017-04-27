@@ -196,6 +196,48 @@ function openAttendeeDrawing() {
   })
 }
 
+function uploadAttendees(file_input) {
+	if(file_input.files.length > 0) {
+		var reader = new FileReader();
+		reader.onload = function(){
+
+			// Parse the CSV file (assuming it's actually a CSV)
+			var csvdata = Papa.parse(reader.result, { header: true });
+			if(csvdata.errors.length > 0) {
+				alert("Unable to process CSV file: " + file_input.files[0].name + "\nThe file format is not valid.");
+				return;
+			}
+
+			// File data is a valid CSV, verify that it contains the correct fields
+			for(var i = 0; i < csvdata.data.length; i++) {
+				
+				// Validate the CSV file header
+				if(typeof csvdata.data[i].first_name != "string" ||
+				   typeof csvdata.data[i].last_name != "string" ||
+				   typeof csvdata.data[i].info != "string") {
+					alert("Unable to process CSV file: " + file_input.files[0].name + "\nEnsure that the header row is properly formatted and try uploading again");
+					return;
+				}
+			
+				// Make sure that at least the first and last name are set
+				if(csvdata.data[i].first_name == "" ||
+				   csvdata.data[i].last_name == "") {
+					alert("Unable to process CSV file: " + file_input.files[0].name + "\nEnsure that the first and last names of all attendees are set and try uploading again");
+					return;
+				}
+			}
+
+			// CSV contents are valid, set the users array to the new data
+			users = {};
+			for(var i = 0; i < csvdata.data.length; i++) {
+				users[i+1] = new BasicUser(i+1, csvdata.data[i].first_name, csvdata.data[i].last_name, csvdata.data[i].info);
+			}
+			orderedUsers = [];
+		}
+		reader.readAsText(file_input.files[0]);
+	}
+}
+
 function setupSlotMachine(usersDictionary) {
   var $carousel = $('#carousel');
   var current = 0;
@@ -241,6 +283,21 @@ function setupActions() {
   $settingsPanel.find('b[name="attendee_drawing"]').on('click', function(e) {
     openAttendeeDrawing();
   });
+
+  // The CSV upload requires the FileReader object
+  //    Only enable upload if FileReader is supported by the browser
+  if(window.FileReader) {
+	$settingsPanel.find('b[name="upload_attendees"]').on('click', function(e) {
+		$('#upload_csv').trigger('click'); 
+	});
+	$('#upload_csv').change(function(ev) {
+		uploadAttendees(this);
+	});
+  } else {
+
+	// FileReader is not supported, so hide the upload menu option
+    $settingsPanel.find('#upload_csv_div').hide();
+  }
 
   $settingsPanel.find('b[name="fullscreen"]').on('click', toggleFullScreen);
 

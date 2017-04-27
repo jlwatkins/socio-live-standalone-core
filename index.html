@@ -60,6 +60,11 @@
                                                                                              style="font-weight: normal; color: white; cursor: pointer;">Attendee
                     Drawing</b>
                     <br>
+					<div id="upload_csv_div"><i style="color: white;" class="fa fa-arrow-up" aria-hidden="true"></i> <b name="upload_attendees"
+                                                                                             style="font-weight: normal; color: white; cursor: pointer;">Upload
+                    Attendees</b>
+                    <br>
+					</div>
                     <i style="color: white;" class="fa fa-arrows-alt" aria-hidden="true"></i> <b name="fullscreen"
                                                                                                  style="font-weight: normal; color: white; cursor: pointer;">Full
                     Screen</b>
@@ -160,6 +165,10 @@
     </div>
 </div>
 
+<div style="width: 0px; height: 0px; overflow: hidden;">
+  <input name="upload_csv" type="file" id="upload_csv" accept=".csv"/>
+</div>
+
 
 <!-- END HEADER -->
 
@@ -193,6 +202,8 @@
 <script src="vendor/presentation/jquery.slotmachine.min.js"></script>
 <!-- Presentation Custom -->
 <script src="js/live-demo.js"></script>
+<!-- CSV Parseer -->
+<script src="js/papaparse.min.js"></script>
 </body>
 
 </html>
