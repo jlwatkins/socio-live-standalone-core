@@ -251,6 +251,9 @@ function uploadAttendees(file_obj) {
 			users[i+1] = new BasicUser(i+1, csvdata.data[i].first_name, csvdata.data[i].last_name, csvdata.data[i].info);
 		}
 		orderedUsers = [];
+
+		// No errors, upload successful send success messages to user
+		alert("Attendees from CSV file: " + file_name + " have been uploaded successfully.");
 	}
 	reader.readAsText(file_obj);
 }

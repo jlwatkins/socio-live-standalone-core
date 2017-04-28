@@ -54,3 +54,25 @@ Just for reference, the repository's Github issues can be found [here](https://g
 * [WebStorm](https://www.jetbrains.com/webstorm/) - Free for students available [here](https://www.jetbrains.com/student/) 
 * [Git](https://git-scm.com/) and [Github](https://github.com/) - Free
 * [SourceTree](https://www.sourcetreeapp.com/) - Free
+
+---
+
+### Design Documenation for CSV Upload Functionality
+
+#### Design Philosophy
+The intent of the assignment was to allow a user to upload a list of attendees that reside in a comma separated values (CSV) file.  The approach taken is to provide this functionality by modifying as little as possible for simplicity as well as to not be invasive to the exisitng interface.  As such, I chose not to re-implement the entire interface and use existing menus as much as possible.
+
+#### Upload Components
+To upload a CSV file, the user opens the action menu and, if their browser supports the FileReader object, they will see an "Upload Attendees" menu option.  The FileReader object support is needed by the implementation so for browsers that do not support this object, the menu for "Uploading Attendees" menu is hidden.  Selecting the menu brings up a file browser filtered for .csv files.  Once the user selects the file containing the attendees (and clicks "open"), the file is uploaded, parsed, data validated, and the attendees list is updated with the new values.  Existing attendees are replaced with those from the CSV file.  If the user wishes to append to existing attendees they will need to update the CSV file and upload again.
+
+#### The PapaParse JS Library
+The parsing of the CSV file itself is done using the PapaParse javascript library (http://papaparse.com/).  The library provides multiple options for CSV parsing and can detect malformatted files.  It also has a very intutive application programming interface.
+
+#### Other Error Checking
+Since the BasicUser object requires 'first name', 'last name', and 'info' fields, the code ensures that the name (both first and last) have a value and that there are no duplicate attendees.  It also ensures that the CSV is properly formatted, requiring a header line as specified in the example csv file given.
+
+#### Test Cases
+Additional test .csv file used are located in the `examples/` directory
+
+#### Future Extension: Server Side Attendee Storage
+Currently when the web page is refreshed the attendee names default back to the original, hard-coded values.  To further improve functionality, it would be beneficial for the uploaded attendees to be saved on the server side and then sent to the client browser when the page is loaded.  This would require additional functionality on the server side to store the uploaded file in an appropriate place.  The client browser could then issue an asynchronous request to the server at load time to retrieve the CSV file data and update the user list.  The loading and validation could be done using the same code as is implemented for this assignment. 
