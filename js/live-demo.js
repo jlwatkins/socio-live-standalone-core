@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // CSV Parsing
 var users = {};
 $('#read_csv').on("click",function(e){
@@ -61,8 +60,6 @@ function parseFile(results){
 }
 // CSV Parsing
 
-=======
->>>>>>> upstream/master
 // Basic wrapper for users
 function BasicUser(id, first, last, info, join_time) {
     this.id = id;
@@ -70,11 +67,7 @@ function BasicUser(id, first, last, info, join_time) {
     this.last = last;
     this.info = info;
     this.joinTime = join_time;
-<<<<<<< HEAD
         
-=======
-
->>>>>>> upstream/master
     this.getFullName = function() {
         return this.first + " " + this.last;
     };
@@ -125,10 +118,7 @@ function toggleFullScreen() {
   }
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> upstream/master
 var $defaultTheme = $('[name="theme-1"]');
 
 var temporary = false;
@@ -145,12 +135,8 @@ var $title = $('title');
 var $eventName = $('[name="event_name"]');
 var $settingsPanel = $('div[class="panel-inner"]');
 
-<<<<<<< HEAD
 
 /*users = {
-=======
-var users = {
->>>>>>> upstream/master
   1: new BasicUser(1, "Desmond", "Strickland", "Fishery", Date.now()),
   2: new BasicUser(2, 'Thaddeus','Galvan','Professional Training & Coaching', Date.now()),
   3: new BasicUser(3, 'Lamont','Friedman','Automotive', Date.now()),
@@ -176,13 +162,9 @@ var users = {
   23: new BasicUser(23, 'Britney','Pennington','Recreational Facilities and Services', Date.now()),
   24: new BasicUser(24, 'Phyllis','Chung','International Affairs', Date.now()),
   25: new BasicUser(25, 'Susanne','Clark','Facilities Services', Date.now())
-<<<<<<< HEAD
 
 };*/
 
-=======
-};
->>>>>>> upstream/master
 
 var orderedUsers = [];
 var nextUser = 0;
@@ -249,7 +231,6 @@ function runControl() {
 }
 
 function openAttendeeDrawing() {
-<<<<<<< HEAD
   document.getElementById('attendee-drawing-overlay').style.width = "100%";  
   var $slotMachine = $('#planeMachine');
   $slotMachine.empty();
@@ -259,14 +240,6 @@ function openAttendeeDrawing() {
     $('#txt').css('display','unset');   
   }
   temporary = true;
-=======
-  document.getElementById('attendee-drawing-overlay').style.width = "100%";
-
-  var $slotMachine = $('#planeMachine');
-  $slotMachine.empty();
-  temporary = true;
-  setupSlotMachine(users);
->>>>>>> upstream/master
 
   $('#start-stop-button').off('click').on('click', function(e) {
 
@@ -293,35 +266,22 @@ function openAttendeeDrawing() {
 }
 
 function setupSlotMachine(usersDictionary) {
-<<<<<<< HEAD
   var $carousel = $('#carousel');   
   var current = 0;
   orderedUsers = [];   
     
   var figures = $carousel.find('figure').empty();  
-=======
-  var $carousel = $('#carousel');
-  var current = 0;
->>>>>>> upstream/master
   for(var key in usersDictionary) {
     var thisUser = usersDictionary[key];
     orderedUsers[current] = {index: current, id: thisUser.id, user: thisUser};
     current = current + 1;
   }
-<<<<<<< HEAD
   figures = $carousel.find('figure'); 
     
   for(var i = 0; i < 6 && i < orderedUsers.length; i++) {
     figures[i].appendChild(orderedUsers[i].user.buildHtmlForAttendeeDrawing());
   }
   
-=======
-
-  var figures = $carousel.find('figure');
-  for(var i = 0; i < 6 && i < orderedUsers.length; i++) {
-    figures[i].appendChild(orderedUsers[i].user.buildHtmlForAttendeeDrawing());
-  }
->>>>>>> upstream/master
   nextUser = i + 1;
 
   control.speed = 2000;
@@ -329,7 +289,6 @@ function setupSlotMachine(usersDictionary) {
 }
 
 function closeAttendeeDrawing() {
-<<<<<<< HEAD
     document.getElementById('attendee-drawing-overlay').style.width = "0%";
 
     $('#carousel').find('figure').empty();
@@ -341,15 +300,6 @@ function closeAttendeeDrawing() {
     
     orderedUsers = [];
     users = {};
-=======
-  document.getElementById('attendee-drawing-overlay').style.width = "0%";
-
-  $('#carousel').find('figure').empty();
-  clearInterval(control.interval);
-  var $startStopBtn = $('#start-stop-button');
-  $startStopBtn.removeClass('running');
-  $startStopBtn.html('SPIN');
->>>>>>> upstream/master
 }
 
 var attendees = new CountUp("attendeesCount", 0, 0, 0, 2.5, options);
@@ -359,11 +309,6 @@ handshakes.start();
 var $industriesList = $('#industriesList');
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> upstream/master
 // SocioLive - non-attendee drawing functionality
 
 
@@ -371,20 +316,12 @@ function setupActions() {
   $settingsPanel.find('b[name="attendee_drawing"]').on('click', function(e) {
     openAttendeeDrawing();
   });
-<<<<<<< HEAD
     
-=======
-
->>>>>>> upstream/master
   $settingsPanel.find('b[name="fullscreen"]').on('click', toggleFullScreen);
 
   $settingsPanel.find('b[name="back_to_socio"]').on('click', function(e) {
     window.location = "https://socio.events"
-<<<<<<< HEAD
   });    
-=======
-  });
->>>>>>> upstream/master
 }
 
 $title.html("SocioLive - Socio Networking");
@@ -456,10 +393,6 @@ var handshakesCount = 0;
 
 setupActions();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> upstream/master
 function readTextFile(file, then) {
   var rawFile = new XMLHttpRequest();
   var allText = undefined;
@@ -479,10 +412,7 @@ function readTextFile(file, then) {
   rawFile.send(null);
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> upstream/master
 $('.theme-selector').on('click', function(e) {
   var themeSelected = $(e.target).attr('name');
   $('header').backstretch('images/presentation/' + themeSelected + '/background.jpg');
