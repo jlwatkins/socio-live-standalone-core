@@ -1,0 +1,13 @@
+{
+  "constellation" : {
+    "red" : 156,
+    "green" : 217,
+    "blue" : 249
+  },
+  "spin-button-background-color" : {
+    "hex" : "#37A6E0"
+  },
+  "darkest-color" : {
+    "hex" : "#384570"
+  }
+}
