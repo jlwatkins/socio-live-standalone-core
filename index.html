@@ -142,6 +142,8 @@
 
     <div class="overlay-content container" style="margin-top: 15%;">
         <div class="col-md-12 col-lg-8 col-lg-offset-2" id="carousel-wrapper">
+            <h3 class="textCounter" id="txt">
+                <center>PLEASE ADD USERS</center></h3>
             <div id="carousel">
                 <figure></figure>
                 <figure></figure>
@@ -156,6 +158,18 @@
             <button id="start-stop-button" class="start-stop-button">
                 SPIN
             </button>
+            <br><br>
+            <!-- Upload CSV -->
+            <div class="upload_container">
+                <form>
+                    <button id="file_select_button">Click here to select file</button>
+                    <input  id="csv_file" name="your_name" type="file" accept=".csv" required/>
+                    <button id="read_csv" class="upload_button">
+                        UPLOAD
+                    </button>
+                </form>
+            </div>
+            <!-- Upload CSV -->
         </div>
     </div>
 </div>
@@ -193,6 +207,8 @@
 <script src="vendor/presentation/jquery.slotmachine.min.js"></script>
 <!-- Presentation Custom -->
 <script src="js/live-demo.js"></script>
+<script src="vendor/papaparse.js"></script>
+<script src="vendor/uploadButton.js"></script>
 </body>
 
 </html>

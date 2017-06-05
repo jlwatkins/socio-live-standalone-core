@@ -246,6 +246,12 @@ header .mouse a {
 #poweredbysocio:hover {
     text-decoration: none;
 }
+.textCounter {
+  font-family: sans-serif;
+  font-size: 120px;
+  font-weight: bold;
+  color: dimgrey;
+}
 /* ================================= */
 /* :::::::::: 3. Countdown ::::::::: */
 /* ================================= */

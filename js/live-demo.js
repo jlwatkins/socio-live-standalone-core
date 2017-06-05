@@ -1,3 +1,66 @@
+// CSV Parsing
+var users = {};
+$('#read_csv').on("click",function(e){
+    e.preventDefault();
+            
+    var el = document.getElementById('read_csv');
+    // Check for the file in input field
+    if (!$('#csv_file')[0].files.length){
+        alert("Please choose at least one file to read the data.");
+    }
+    // Check for the file extention
+	if(document.getElementById('csv_file').value.toLowerCase().lastIndexOf(".csv")==-1){
+        // It stops if the file is not csv
+        alert("Please upload a file with .csv extension.");
+        document.getElementById('file_select_button').innerHTML = "Click here to select file";
+        return false;
+    }else{
+        $('#csv_file').parse({ // Parse csv file
+            config: {
+                delimiter: "auto",
+                complete: parseFile
+            },
+            before: function(file, inputElem)
+            {
+                console.log("Parsing file...", file);
+            },
+            error: function(err, file)
+            {
+                console.log("ERROR:", err, file);
+            },
+            complete: function()
+            {
+                if($('#csv_file')[0].files.length){
+                    setupSlotMachine(users); // Add users from csv file
+                    document.getElementById('txt').style.display = 'none';
+                    document.getElementById('csv_file').value = '';
+                
+                    console.log(users);
+                }
+            }
+        });
+    }
+});
+
+
+
+var data = [];
+var cells = [];
+
+function parseFile(results){
+	data = results.data;
+	users = {};
+    orderedUsers = [];
+	for(i=1; i<data.length; i++){
+		var row = data[i];
+		cells = row.join(",").split(",");
+        // Parse the data from from csv and put them in user object
+        users[i] = new BasicUser(i, cells[0], cells[1], cells[2], Date.now());
+    }
+    return users;
+}
+// CSV Parsing
+
 // Basic wrapper for users
 function BasicUser(id, first, last, info, join_time) {
     this.id = id;
@@ -5,7 +68,7 @@ function BasicUser(id, first, last, info, join_time) {
     this.last = last;
     this.info = info;
     this.joinTime = join_time;
-
+        
     this.getFullName = function() {
         return this.first + " " + this.last;
     };
@@ -56,6 +119,7 @@ function toggleFullScreen() {
   }
 }
 
+
 var $defaultTheme = $('[name="theme-1"]');
 
 var temporary = false;
@@ -72,7 +136,8 @@ var $title = $('title');
 var $eventName = $('[name="event_name"]');
 var $settingsPanel = $('div[class="panel-inner"]');
 
-var users = {
+
+/*users = {
   1: new BasicUser(1, "Desmond", "Strickland", "Fishery", Date.now()),
   2: new BasicUser(2, 'Thaddeus','Galvan','Professional Training & Coaching', Date.now()),
   3: new BasicUser(3, 'Lamont','Friedman','Automotive', Date.now()),
@@ -98,7 +163,9 @@ var users = {
   23: new BasicUser(23, 'Britney','Pennington','Recreational Facilities and Services', Date.now()),
   24: new BasicUser(24, 'Phyllis','Chung','International Affairs', Date.now()),
   25: new BasicUser(25, 'Susanne','Clark','Facilities Services', Date.now())
-};
+
+};*/
+
 
 var orderedUsers = [];
 var nextUser = 0;
@@ -165,12 +232,15 @@ function runControl() {
 }
 
 function openAttendeeDrawing() {
-  document.getElementById('attendee-drawing-overlay').style.width = "100%";
-
+  document.getElementById('attendee-drawing-overlay').style.width = "100%";  
   var $slotMachine = $('#planeMachine');
   $slotMachine.empty();
+  console.log(orderedUsers);
+// Makes the drawing page as a default after opening it again    
+  if(orderedUsers.length == 0){
+    $('#txt').css('display','unset');   
+  }
   temporary = true;
-  setupSlotMachine(users);
 
   $('#start-stop-button').off('click').on('click', function(e) {
 
@@ -197,18 +267,22 @@ function openAttendeeDrawing() {
 }
 
 function setupSlotMachine(usersDictionary) {
-  var $carousel = $('#carousel');
+  var $carousel = $('#carousel');   
   var current = 0;
+  orderedUsers = [];   
+    
+  var figures = $carousel.find('figure').empty();  
   for(var key in usersDictionary) {
     var thisUser = usersDictionary[key];
     orderedUsers[current] = {index: current, id: thisUser.id, user: thisUser};
     current = current + 1;
   }
-
-  var figures = $carousel.find('figure');
+  figures = $carousel.find('figure'); 
+    
   for(var i = 0; i < 6 && i < orderedUsers.length; i++) {
     figures[i].appendChild(orderedUsers[i].user.buildHtmlForAttendeeDrawing());
   }
+  
   nextUser = i + 1;
 
   control.speed = 2000;
@@ -216,13 +290,19 @@ function setupSlotMachine(usersDictionary) {
 }
 
 function closeAttendeeDrawing() {
-  document.getElementById('attendee-drawing-overlay').style.width = "0%";
+    document.getElementById('attendee-drawing-overlay').style.width = "0%";
 
-  $('#carousel').find('figure').empty();
-  clearInterval(control.interval);
-  var $startStopBtn = $('#start-stop-button');
-  $startStopBtn.removeClass('running');
-  $startStopBtn.html('SPIN');
+    $('#carousel').find('figure').empty();
+    clearInterval(control.interval);
+    
+    var $startStopBtn = $('#start-stop-button');
+    $startStopBtn.removeClass('running');
+    $startStopBtn.html('SPIN');
+    
+    orderedUsers = [];
+    users = {};
+    
+    document.getElementById('file_select_button').innerHTML = "Click here to select file";
 }
 
 var attendees = new CountUp("attendeesCount", 0, 0, 0, 2.5, options);
@@ -232,8 +312,6 @@ handshakes.start();
 var $industriesList = $('#industriesList');
 
 
-
-
 // SocioLive - non-attendee drawing functionality
 
 
@@ -241,12 +319,12 @@ function setupActions() {
   $settingsPanel.find('b[name="attendee_drawing"]').on('click', function(e) {
     openAttendeeDrawing();
   });
-
+    
   $settingsPanel.find('b[name="fullscreen"]').on('click', toggleFullScreen);
 
   $settingsPanel.find('b[name="back_to_socio"]').on('click', function(e) {
     window.location = "https://socio.events"
-  });
+  });    
 }
 
 $title.html("SocioLive - Socio Networking");
@@ -318,7 +396,6 @@ var handshakesCount = 0;
 
 setupActions();
 
-
 function readTextFile(file, then) {
   var rawFile = new XMLHttpRequest();
   var allText = undefined;
@@ -337,6 +414,7 @@ function readTextFile(file, then) {
   };
   rawFile.send(null);
 }
+
 
 $('.theme-selector').on('click', function(e) {
   var themeSelected = $(e.target).attr('name');
