@@ -12,6 +12,7 @@ $('#read_csv').on("click",function(e){
 	if(document.getElementById('csv_file').value.toLowerCase().lastIndexOf(".csv")==-1){
         // It stops if the file is not csv
         alert("Please upload a file with .csv extension.");
+        document.getElementById('file_select_button').innerHTML = "Click here to select file";
         return false;
     }else{
         $('#csv_file').parse({ // Parse csv file
@@ -300,6 +301,8 @@ function closeAttendeeDrawing() {
     
     orderedUsers = [];
     users = {};
+    
+    document.getElementById('file_select_button').innerHTML = "Click here to select file";
 }
 
 var attendees = new CountUp("attendeesCount", 0, 0, 0, 2.5, options);

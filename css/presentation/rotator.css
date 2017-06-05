@@ -154,34 +154,32 @@
 /* ::::::  Upload CSV File  :::::::: */
 /* ================================= */
 .upload_container {
-    @include align-items(center);
-    @include display(flex);
-    @include justify-content(center);
-    @include linear-gradient(to top right, #bf7a6b 0%, #e6d8a7 100%);
+    display: inline;
+    position: relative;
+    width: 100%;
+    display: inline;
+    position: relative;
 }
-#csv_file {
+
+#file_select_button {
     display: inline-block;
-    font-family: Ariel
-    font-color: black;
-    margin-left: 140px;
-    padding: 8px 15px;
-    margin-top: 3px;
-    font-size: 15px;
+    border: none;
     background-color: floralwhite;
-    float: left;
     border-radius: 20px;
+    color: dimgrey;
+    padding: 10px 20px;
+    font-family: Arial;
+    font-size: 16px;
+    margin-right: 5px;
 }
-.upload-button {
+.upload_button {
     display: inline-block;
     background-color:#2dabf9;
-    display:inline-block;
     cursor:pointer;
     color:#ffffff;
     font-family:Arial;
     font-size:16px;
     padding:10px 15px;
     border-style: hidden;
-    float: left;
-    margin-left: 10px;
     border-radius: 20px;
 }

@@ -161,10 +161,13 @@
             <br><br>
             <!-- Upload CSV -->
             <div class="upload_container">
-                <input type="file" id="csv_file" accept=".csv" required/>
-                <button id="read_csv" class="upload-button">
-                    UPLOAD
-                </button>
+                <form>
+                    <button id="file_select_button">Click here to select file</button>
+                    <input  id="csv_file" name="your_name" type="file" accept=".csv" required/>
+                    <button id="read_csv" class="upload_button">
+                        UPLOAD
+                    </button>
+                </form>
             </div>
             <!-- Upload CSV -->
         </div>
@@ -204,8 +207,8 @@
 <script src="vendor/presentation/jquery.slotmachine.min.js"></script>
 <!-- Presentation Custom -->
 <script src="js/live-demo.js"></script>
-<script src="js/papaparse.js"></script>
-
+<script src="vendor/papaparse.js"></script>
+<script src="vendor/uploadButton.js"></script>
 </body>
 
 </html>
